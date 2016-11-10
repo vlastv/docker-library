@@ -1,6 +1,6 @@
 FROM openjdk:jre
 
-ENV YOUTRACK_VERSION 7.0.27777
+ENV YOUTRACK_VERSION 7.0.28110
 
 RUN mkdir /usr/local/youtrack \
         && curl -L https://download.jetbrains.com/charisma/youtrack-$YOUTRACK_VERSION.jar > /usr/local/youtrack/youtrack.jar
