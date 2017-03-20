@@ -19,10 +19,11 @@ RUN apk add --no-cache --virtual .build-deps \
 			| xargs -r apk info --installed \
 			| sort -u \
 	)" \
-	&& apk add --no-cache --virtual .php-rundeps $runDeps \
+	&& apk add --no-cache --virtual .ansible-rundeps $runDeps \
 	\
 	&& apk del .build-deps \
 	&& { \
 		echo "[defaults]"; \
 		echo "host_key_checking = False"; \
 	} | tee ~/.ansible.cfg
+
