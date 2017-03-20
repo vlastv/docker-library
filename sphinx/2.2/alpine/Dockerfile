@@ -37,3 +37,5 @@ RUN apk add --no-cache --virtual .build-deps \
 	&& apk add --no-cache --virtual .sphinx-rundeps $runDeps \
 	\
 	&& apk del .build-deps
+
+CMD ["searchd", "--nodetach"]	
