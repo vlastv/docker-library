@@ -12,10 +12,11 @@ RUN set -xe \
 	&& rm -rf /tmp/ledger-$LEDGER_VERSION \
 	\
 	&& runDeps="$( \
-		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
-			| tr ',' '\n' \
+		scanelf --needed --nobanner --recursive /usr/local \
+			| awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
 			| sort -u \
-			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+			| xargs -r apk info --installed \
+			| sort -u \
 	)" \
 	&& apk add --no-cache --virtual .ledger-rundeps $runDeps \
 	&& apk del .build-deps    
